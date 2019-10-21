@@ -1,0 +1,21 @@
+.plain {
+  font-size: 13px;
+  font-weight: normal;
+  text-align: right;
+  color: #303030;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+  color: #00a5d2;
+
+  &.pressed,
+  &:hover,
+  &:focus,
+  &:active {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,94 @@
+//@import "../../styles/main.scss";
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+.search {
+  height: 40px;
+  display: block;
+  font-size: 14px;
+  width: 90%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(230, 230, 230);
+  border-image: initial;
+  padding: 5px 12px 7px;
+  border-radius: 4px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  outline: 0px;
+  margin: 10px auto;
+}
+.opener{
+  cursor: pointer;
+}
+
+.resource-list {
+  margin: 10px;
+  margin-top: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: scroll;
+}
+.resource {
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+  padding: 5px ;
+  //border-bottom: 1px solid rgb(221, 221, 221);
+  margin: 0 5px;
+  cursor: pointer;
+  &:hover {
+    background: #f0fafc;
+  }
+  &.selected {
+    background: #f0fafc;
+    .resource__checkmark svg {
+      display: inline;
+    }
+  }
+}
+
+
+.resource__details {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #333; // TODO: config
+  max-width: 65%;
+  span {
+    line-height: 18px;
+  }
+}
+.resource__details--secondary {
+  color: #ccc; // TODO: config
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.avatar img {
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.resource__checkmark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  svg {
+    display: none;
+  }
+}
+
+.actions {
+  text-align: right;
+  padding: 5px 10px 5px 0;
+}
