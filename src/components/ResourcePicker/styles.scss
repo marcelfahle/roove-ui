@@ -25,7 +25,7 @@
   cursor: pointer;
 }
 
-.resource-list {
+.resourceList {
   margin: 10px;
   margin-top: 0;
   padding: 0;
@@ -45,14 +45,14 @@
   }
   &.selected {
     background: #f0fafc;
-    .resource__checkmark svg {
+    .resourceCheckmark svg {
       display: inline;
     }
   }
 }
 
 
-.resource__details {
+.resourceDetails {
   margin-left: 12px;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,10 @@
     line-height: 18px;
   }
 }
-.resource__details--secondary {
+.resourceDetailsPrimary {
+  font-weight: bold;
+}
+.resourceDetailsSecondary {
   color: #ccc; // TODO: config
   font-size: 12px;
   white-space: nowrap;
@@ -78,7 +81,7 @@
   border-radius: 50%;
 }
 
-.resource__checkmark {
+.resourceCheckmark {
   display: flex;
   flex-direction: column;
   justify-content: center;

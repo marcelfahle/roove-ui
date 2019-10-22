@@ -28,11 +28,11 @@ const UserItem: FC<UserItemProps> = ({ user, onSelect, selected }) => (
     <div className={style.avatar}>
       <img width="80px" src={user.avatar} />
     </div>
-    <div className="resource__details">
-      <span className="resource__details--primary">{user.name}</span>
-      <span className="resource__details--secondary">{user.status}</span>
+    <div className={style.resourceDetails}>
+      <span className={style.resourceDetailsPrimary}>{user.name}</span>
+      <span className={style.resourceDetailsSecondary}>{user.status}</span>
     </div>
-    <div className="resource__checkmark">
+    <div className={style.resourceCheckmark}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -76,7 +76,7 @@ const UserList: FC<UserListProps> = ({ users }) => {
     console.log(selectedItems);
   };
   return (
-    <ul className="resource-list">
+    <ul className={style.resourceList}>
       {users.map((user: User) => (
         <UserItem
           key={user.id}
@@ -135,17 +135,17 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
     <span>
       {clonedTrigger}
       <Popover active={popoverActive}>
-        <div className="wrapper">
+        <div className={style.wrapper}>
           <input
             type="text"
             placeholder="Search"
-            className="search"
+            className={style.search}
             value={searchValue}
             onChange={e => setSearchValue(e.target.value)}
           />
 
           <UserList users={filteredUsers()} />
-          <div className="actions">
+          <div className={style.actions}>
             <Button plain onClick={handleConfirm}>
               Confirm
             </Button>
