@@ -13,6 +13,7 @@ export interface User {
 export interface UserListProps {
   users: User[];
   onSelectionChange: (resourceIds: string[]) => void;
+  selected: string[];
 }
 
 //const activator = <button onClick={() => console.log('click')}>Click</button>
@@ -63,8 +64,8 @@ const UserItem: FC<UserItemProps> = ({user, onSelect, selected}) => (
   </div>
 );
 
-const UserList: FC<UserListProps> = ({users, onSelectionChange}) => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+const UserList: FC<UserListProps> = ({users, selected, onSelectionChange}) => {
+  const [selectedItems, setSelectedItems] = useState<string[]>(selected);
 
   const toggleSelect = (id: string) => {
     if (selectedItems.length > 0 && selectedItems.includes(id)) {
@@ -97,20 +98,24 @@ const UserList: FC<UserListProps> = ({users, onSelectionChange}) => {
 export interface ResourcePickerTypes {
   resources: User[];
   onConfirm: (selectedResources: string[]) => void;
+  selected: string[];
 }
 
 export const ResourcePicker: FC<ResourcePickerTypes> = ({
   resources,
+  selected,
   onConfirm,
   children,
 }) => {
   const [popoverActive, setPopoverActive] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [selectedResources, setSelectedResources] = useState();
+  const [selectedResources, setSelectedResources] = useState(selected);
   //const togglePopoverActive = useCallback(
   //  () => setPopoverActive(popoverActive => !popoverActive),
   //  []
   //);
+
+  console.log('selectedResources', selectedResources);
 
   const lowerCasedSearch = () => searchValue.toLowerCase();
   const filteredUsers = () =>
@@ -155,6 +160,7 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
 
           <UserList
             users={filteredUsers()}
+            selected={selectedResources}
             onSelectionChange={handleSelectionChange}
           />
           <div className={style.actions}>
