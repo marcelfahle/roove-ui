@@ -73,8 +73,6 @@ const UserList: FC<UserListProps> = ({users, selected, onSelectionChange}) => {
     } else {
       setSelectedItems([...selectedItems, id]);
     }
-
-    console.log(selectedItems);
   };
 
   useEffect(() => {
