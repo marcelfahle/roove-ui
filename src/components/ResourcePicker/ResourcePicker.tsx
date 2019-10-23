@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
-import { Popover } from '../Popover';
-import { Button } from '../Button';
+import React, {FC, useState} from 'react';
+import {Popover} from '../Popover';
+import {Button} from '../Button';
 import style from './styles.scss';
 
 export interface User {
@@ -20,11 +20,10 @@ interface UserItemProps {
   onSelect: (id: string) => void;
   selected: boolean;
 }
-const UserItem: FC<UserItemProps> = ({ user, onSelect, selected }) => (
+const UserItem: FC<UserItemProps> = ({user, onSelect, selected}) => (
   <div
-    className={`resource ${selected && ' selected'}`}
-    onClick={() => onSelect(user.id)}
-  >
+    className={`${style.resource} ${selected && style.selected}`}
+    onClick={() => onSelect(user.id)}>
     <div className={style.avatar}>
       <img width="80px" src={user.avatar} />
     </div>
@@ -38,8 +37,7 @@ const UserItem: FC<UserItemProps> = ({ user, onSelect, selected }) => (
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="16"
         height="16"
-        viewBox="0 0 16 16"
-      >
+        viewBox="0 0 16 16">
         <defs>
           <path id="a" d="M0 0h16v16H0z" />
         </defs>
@@ -64,7 +62,7 @@ const UserItem: FC<UserItemProps> = ({ user, onSelect, selected }) => (
   </div>
 );
 
-const UserList: FC<UserListProps> = ({ users }) => {
+const UserList: FC<UserListProps> = ({users}) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const toggleSelect = (id: string) => {
