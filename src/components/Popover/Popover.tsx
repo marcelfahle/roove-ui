@@ -2,10 +2,9 @@ import React, {FunctionComponent} from 'react';
 
 import styles from './Popover.scss';
 
-type PopoverProps = {
+export type PopoverProps = {
   active: boolean;
 };
-
 
 export const Popover: FunctionComponent<PopoverProps> = ({
   active,

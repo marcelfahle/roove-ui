@@ -10,12 +10,12 @@ export interface User {
   avatar: string;
 }
 
-interface UserListProps {
+export interface UserListProps {
   users: User[];
 }
 
 //const activator = <button onClick={() => console.log('click')}>Click</button>
-interface UserItemProps {
+export interface UserItemProps {
   user: User;
   onSelect: (id: string) => void;
   selected: boolean;
@@ -87,7 +87,7 @@ const UserList: FC<UserListProps> = ({users}) => {
   );
 };
 
-interface ResourcePickerTypes {
+export interface ResourcePickerTypes {
   resources: User[];
   onConfirm: () => void;
 }
