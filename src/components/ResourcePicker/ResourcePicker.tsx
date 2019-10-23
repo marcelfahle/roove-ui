@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {Popover} from '../Popover';
 import {Button} from '../Button';
 import style from './styles.scss';
@@ -12,6 +12,7 @@ export interface User {
 
 export interface UserListProps {
   users: User[];
+  onSelectionChange: (resourceIds: string[]) => void;
 }
 
 //const activator = <button onClick={() => console.log('click')}>Click</button>
@@ -62,7 +63,7 @@ const UserItem: FC<UserItemProps> = ({user, onSelect, selected}) => (
   </div>
 );
 
-const UserList: FC<UserListProps> = ({users}) => {
+const UserList: FC<UserListProps> = ({users, onSelectionChange}) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const toggleSelect = (id: string) => {
@@ -71,8 +72,14 @@ const UserList: FC<UserListProps> = ({users}) => {
     } else {
       setSelectedItems([...selectedItems, id]);
     }
+
     console.log(selectedItems);
   };
+
+  useEffect(() => {
+    onSelectionChange(selectedItems);
+  }, [selectedItems]);
+
   return (
     <ul className={style.resourceList}>
       {users.map((user: User) => (
@@ -89,7 +96,7 @@ const UserList: FC<UserListProps> = ({users}) => {
 
 export interface ResourcePickerTypes {
   resources: User[];
-  onConfirm: () => void;
+  onConfirm: (selectedResources: string[]) => void;
 }
 
 export const ResourcePicker: FC<ResourcePickerTypes> = ({
@@ -99,6 +106,7 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
 }) => {
   const [popoverActive, setPopoverActive] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [selectedResources, setSelectedResources] = useState();
   //const togglePopoverActive = useCallback(
   //  () => setPopoverActive(popoverActive => !popoverActive),
   //  []
@@ -111,12 +119,15 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
   const handleOpen = () => setPopoverActive(true);
 
   const handleConfirm = () => {
-    onConfirm();
+    onConfirm(selectedResources);
     // TODO: hide popover after async,
     // make all inactive during server operation
     // (semi-transparent layover)
     setPopoverActive(false);
   };
+
+  const handleSelectionChange = (resourceIds: string[]) =>
+    setSelectedResources(resourceIds);
 
   let clonedTrigger = null;
   React.Children.forEach(children, (child, index) => {
@@ -142,7 +153,10 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
             onChange={e => setSearchValue(e.target.value)}
           />
 
-          <UserList users={filteredUsers()} />
+          <UserList
+            users={filteredUsers()}
+            onSelectionChange={handleSelectionChange}
+          />
           <div className={style.actions}>
             <Button plain onClick={handleConfirm}>
               Confirm
