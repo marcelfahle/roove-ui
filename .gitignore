@@ -101,3 +101,4 @@ public
 .tern-port
 example
 dist
+.DS_Store
