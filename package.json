@@ -13,21 +13,35 @@
   "scripts": {
     "build": "tsm src && rollup -c",
     "start": "tsm src && rollup -cw",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@storybook/addon-actions": "^5.2.5",
+    "@storybook/addon-links": "^5.2.5",
+    "@storybook/addons": "^5.2.5",
+    "@storybook/react": "^5.2.5",
     "@testing-library/react": "^9.3.0",
-    "@types/jest": "^24.0.19",
-    "@types/react": "^16.9.9",
-    "@types/react-dom": "^16.9.2",
+    "@types/faker": "^4.1.7",
+    "@types/jest": "^24.0.20",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
     "@types/react-test-renderer": "^16.9.1",
     "autoprefixer": "^9.6.5",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "faker": "^4.1.0",
     "jest": "^24.9.0",
     "node-sass": "^4.12.0",
+    "react-docgen-typescript-loader": "^3.3.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-scripts-ts": "^3.1.0",
     "react-test-renderer": "^16.10.2",
     "rollup": "^1.25.1",
@@ -38,14 +52,20 @@
     "rollup-plugin-postcss-modules": "^2.0.1",
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-typescript2": "^0.24.3",
-    "sass": "^1.23.0",
+    "sass": "^1.23.3",
+    "sass-loader": "^8.0.0",
     "ts-jest": "^24.1.0",
     "typed-scss-modules": "^0.0.12",
     "typescript": "^3.6.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/node": "^12.11.7"
+  },
   "peerDependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
+  },
+  "resolutions": {
+    "@types/react": "^16.9.11"
   }
 }
