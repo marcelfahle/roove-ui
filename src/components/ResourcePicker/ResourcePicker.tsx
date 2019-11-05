@@ -1,6 +1,6 @@
-import React, {FC, useState, useEffect} from 'react';
-import {Popover} from '../Popover';
-import {Button} from '../Button';
+import React, { FC, useState, useEffect } from 'react';
+import { Popover } from '../Popover';
+import { Button } from '../Button';
 import style from './styles.scss';
 
 export interface User {
@@ -22,10 +22,11 @@ export interface UserItemProps {
   onSelect: (id: string) => void;
   selected: boolean;
 }
-const UserItem: FC<UserItemProps> = ({user, onSelect, selected}) => (
+const UserItem: FC<UserItemProps> = ({ user, onSelect, selected }) => (
   <div
     className={`${style.resource} ${selected && style.selected}`}
-    onClick={() => onSelect(user.id)}>
+    onClick={() => onSelect(user.id)}
+  >
     <div className={style.avatar}>
       <img width="80px" src={user.avatar} />
     </div>
@@ -39,7 +40,8 @@ const UserItem: FC<UserItemProps> = ({user, onSelect, selected}) => (
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="16"
         height="16"
-        viewBox="0 0 16 16">
+        viewBox="0 0 16 16"
+      >
         <defs>
           <path id="a" d="M0 0h16v16H0z" />
         </defs>
@@ -64,7 +66,11 @@ const UserItem: FC<UserItemProps> = ({user, onSelect, selected}) => (
   </div>
 );
 
-const UserList: FC<UserListProps> = ({users, selected, onSelectionChange}) => {
+const UserList: FC<UserListProps> = ({
+  users,
+  selected,
+  onSelectionChange,
+}) => {
   const [selectedItems, setSelectedItems] = useState<string[]>(selected);
 
   const toggleSelect = (id: string) => {
@@ -113,8 +119,6 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
   //  []
   //);
 
-  console.log('selectedResources', selectedResources);
-
   const lowerCasedSearch = () => searchValue.toLowerCase();
   const filteredUsers = () =>
     resources.filter(u => u.name.toLowerCase().includes(lowerCasedSearch()));
@@ -126,6 +130,10 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
     // TODO: hide popover after async,
     // make all inactive during server operation
     // (semi-transparent layover)
+    closePopover();
+  };
+
+  const closePopover = () => {
     setPopoverActive(false);
   };
 
@@ -146,28 +154,30 @@ export const ResourcePicker: FC<ResourcePickerTypes> = ({
   return (
     <span>
       {clonedTrigger}
-      <Popover active={popoverActive}>
-        <div className={style.wrapper}>
-          <input
-            type="text"
-            placeholder="Search"
-            className={style.search}
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-          />
+      {popoverActive && (
+        <Popover onClose={closePopover}>
+          <div className={style.wrapper}>
+            <input
+              type="text"
+              placeholder="Search"
+              className={style.search}
+              value={searchValue}
+              onChange={e => setSearchValue(e.target.value)}
+            />
 
-          <UserList
-            users={filteredUsers()}
-            selected={selectedResources}
-            onSelectionChange={handleSelectionChange}
-          />
-          <div className={style.actions}>
-            <Button plain onClick={handleConfirm}>
-              Confirm
-            </Button>
+            <UserList
+              users={filteredUsers()}
+              selected={selectedResources}
+              onSelectionChange={handleSelectionChange}
+            />
+            <div className={style.actions}>
+              <Button plain onClick={handleConfirm}>
+                Confirm
+              </Button>
+            </div>
           </div>
-        </div>
-      </Popover>
+        </Popover>
+      )}
     </span>
   );
 };
